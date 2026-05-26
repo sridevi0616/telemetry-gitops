@@ -6,7 +6,6 @@ metadata:
   namespace: {{ .Values.namespace }}
 
 spec:
-
   replicas: {{ .Values.replicaCount }}
 
   selector:
@@ -20,22 +19,25 @@ spec:
         app: telemetry-collector
 
     spec:
+
       imagePullSecrets:
-      - name: ghcr-secret
+        - name: ghcr-secret
 
       containers:
+        - name: collector
 
-      - name: collector
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
 
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
 
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        volumeMounts:
-        - name: config
-          mountPath: /config
+          ports:
+            - containerPort: 8000
+
+          volumeMounts:
+            - name: config
+              mountPath: /config
+
       volumes:
-      - name: config
-        configMap:
-      name: telemetry-config
-        ports:
-        - containerPort: 8000
+        - name: config
+          configMap:
+            name: telemetry-config
