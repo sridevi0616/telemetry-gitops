@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: telemetry-config
+  namespace: {{ .Values.namespace }}
+
+data:
+  TELEMETRY_INTERVAL: "{{ .Values.config.telemetryInterval }}"
+  MAX_ROWS: "{{ .Values.config.maxRows }}"
