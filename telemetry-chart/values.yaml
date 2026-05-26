@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 namespace: telemetry
 config:
-  telemetryInterval: 2
-  maxRows: 55
+  telemetryInterval: 5
+  maxRows: 60
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1
 
